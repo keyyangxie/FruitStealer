@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "RewardData",
+		uint64 ResourceId = 5645a9cea1aacd7c,
+	},
+},

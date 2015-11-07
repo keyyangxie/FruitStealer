@@ -1,0 +1,30 @@
+
+class MusicOff : ZilchComponent
+{
+    var Menu : Level = Level.Find("Menu");
+   function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.MouseUp, this.OnMouseUp);
+        Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+        Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
+        //Zero.Connect(this.Owner, Events.MouseUp, this.OnMouseUp);
+        
+    }
+
+
+    function OnMouseUp(event : ViewportMouseEvent)
+    {
+        this.Space.Global.Switch=0;
+        this.Space.LoadLevel(this.Menu);
+    }
+    
+    function OnMouseEnter(event : ViewportMouseEvent)
+    {
+        this.Owner.Transform.Scale=Real3(3.5,3.5,0);
+    }
+    
+    function OnMouseExit(event : ViewportMouseEvent)
+    {
+        this.Owner.Transform.Scale=Real3(3,3,0);
+    }
+}

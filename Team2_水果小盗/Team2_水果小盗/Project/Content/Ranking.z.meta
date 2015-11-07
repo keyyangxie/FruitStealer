@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "Ranking",
+		uint64 ResourceId = 56fda6c3ebf33b6a,
+	},
+},

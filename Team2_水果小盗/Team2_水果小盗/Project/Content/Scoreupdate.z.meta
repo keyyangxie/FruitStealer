@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "Scoreupdate",
+		uint64 ResourceId = 567ba6409025cbea,
+	},
+},

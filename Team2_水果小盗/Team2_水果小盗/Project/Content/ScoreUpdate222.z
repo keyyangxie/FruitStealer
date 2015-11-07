@@ -1,0 +1,33 @@
+class Scoreupdate222: ZilchComponent
+{
+    
+    var Victory :  Level = Level.Find("Victory");
+    var Score: Integer = 0;
+    var PlayerPos : Cog = null;
+    [Dependency]
+    var SpriteText: SpriteText;
+
+    function Initialize(init : CogInitializer)
+    {
+        this.PlayerPos = this.Space.FindObjectByName("Player");
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        // Display the data
+        this.Owner.SpriteText.Text = "Score: `this.Score`";
+    }
+
+   
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Score = this.Space.Global.Score;
+        // Display the data
+        this.Owner.SpriteText.Text = "Score: `this.Score`";
+        if(this.Score >80 )
+        {
+            this.Owner.SpriteText.Text = "Score: `this.Score`   Now You Can Pass The Level !"; 
+            if(this.PlayerPos.Transform.Translation.Y<-1){
+                this.Space.LoadLevel(this.Victory);
+            }
+        }
+        
+    }
+}

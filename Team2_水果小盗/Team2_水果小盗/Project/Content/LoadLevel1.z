@@ -1,0 +1,26 @@
+class LoadLevel1 : ZilchComponent
+{
+    var Level1 : Level = Level.Find("Level1");
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.MouseUp, this.OnMouseUp);
+        Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+        Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+   function OnMouseUp(event : ViewportMouseEvent)
+    {
+        this.Space.LoadLevel(this.Level1);
+    }
+    
+    function OnMouseEnter(event : ViewportMouseEvent)
+    {
+        this.Owner.Transform.Scale=Real3(3.5,3.5,0);
+    }
+    
+    function OnMouseExit(event : ViewportMouseEvent)
+    {
+        this.Owner.Transform.Scale=Real3(3,3,0);
+    }
+}

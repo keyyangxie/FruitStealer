@@ -1,0 +1,34 @@
+class CollisionDealingPlayer: ZilchComponent{
+    var Score1: Integer = 0;
+    function Initialize(init : CogInitializer)    {        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);    }    function OnCollisionStarted(event : CollisionEvent)    {        // Get the object we collided with:        var otherObject = event.OtherObject;
+        
+        this.Score1 = this.Space.Global.Score;        // If we collided with the block,        if ((this.Owner.Name=="Watermelon"||this.Owner.Name=="Strawberry") && (otherObject.Name == "Player"||otherObject.Name == "Map"))        {            this.Owner.Destroy();        }
+        if (this.Owner.Name=="Player" && otherObject.Name == "Boss")        {            this.Space.ReloadLevel();
+            this.Space.Global.Score = 0;        }                if(this.Owner.Name == "dog" && (otherObject.Name=="DefaultTile" || otherObject.Name=="Watermelon"||otherObject.Name=="Player"||otherObject.Name=="Strawberry"||otherObject.Name=="dog"))        {            var randNumGen = new Random();            var x = randNumGen.DieRoll(4);            if(x==1){                this.Owner.RigidBody.Velocity=Real3(-8,0,0);
+                this.Owner.Sprite.FlipX = true;            }else if(x==2){                this.Owner.RigidBody.Velocity=Real3(8,0,0);
+                this.Owner.Sprite.FlipX = false;            }else if(x==3){                this.Owner.RigidBody.Velocity=Real3(0,8,0);            }else{                this.Owner.RigidBody.Velocity=Real3(0,-8,0);            }        }        else if(this.Owner.Name == "Player"  && (otherObject.Name=="Watermelon" || otherObject.Name=="Strawberry") && this.Owner.Transform.Scale.X<=1.3)        {
+            if(this.Space.Global.Switch==1)
+            {this.Owner.SoundEmitter.PlayCue(SoundCue.Find("dk-a2600_get"));}
+                        this.Owner.Transform.Scale += Real3(0.1,0.1,0);        }        else if(this.Owner.Name == "Player" && (otherObject.Name == "dog"))        {
+                        this.Owner.Transform.Scale -= Real3(0.5,0.5,0);        }
+        if(this.Owner.Transform.Scale.X<= 0.1)
+        {
+            this.Owner.SoundEmitter.PlayCue(SoundCue.Find("dk-a2600_die"));
+            this.Space.ReloadLevel();
+            this.Space.Global.Score = 0;
+        }
+        if(this.Owner.Name == "Boss" && (otherObject.Name=="DefaultTile" ||otherObject.Name=="Watermelon"||otherObject.Name=="dog"))        {            var randNumGen = new Random();            var x = randNumGen.DieRoll(4);            if(x==1){                this.Owner.RigidBody.Velocity=Real3(10,0,0);
+                this.Owner.Sprite.FlipX = true;            }else if(x==2){                this.Owner.RigidBody.Velocity=Real3(-10,0,0);
+                this.Owner.Sprite.FlipX = false;            }else if(x==3){                this.Owner.RigidBody.Velocity=Real3(0,10,0);            }else{                this.Owner.RigidBody.Velocity=Real3(0,-10,0);            }        }
+        if(this.Owner.Name == "Player"  && otherObject.Name=="Watermelon")        {
+            if(this.Space.Global.Switch==1)
+            {this.Owner.SoundEmitter.PlayCue(SoundCue.Find("dk-a2600_get"));}
+            this.Score1 += 5;
+            this.Space.Global.Score = this.Score1;
+        }
+        if(this.Owner.Name == "Player"  && otherObject.Name=="Strawberry")        {
+             if(this.Space.Global.Switch==1)
+            {this.Owner.SoundEmitter.PlayCue(SoundCue.Find("dk-a2600_get"));}
+            this.Score1 += 10;
+            this.Space.Global.Score = this.Score1;
+        }    }}

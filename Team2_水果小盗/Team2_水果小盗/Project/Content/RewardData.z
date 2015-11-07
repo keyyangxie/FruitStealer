@@ -1,0 +1,39 @@
+class RewardData : ZilchComponent
+{
+    // The value we'll eventually want to save
+    [Serialized]
+    var Score: Integer = 20;
+
+    [Dependency]
+    var SpriteText: SpriteText;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        //Display the data
+        this.Owner.SpriteText.Text = "Score: `this.Score`";
+    }
+
+    //function OnLogicUpdate(event : UpdateEvent)
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        
+        // When the player eat a fruit ,the score will increse.
+        if(this.Owner.Name == "Player"  && otherObject.Name=="Watermelon")
+        {
+            // Increase the score
+            this.Score += 5;
+
+            // And update the display
+            this.Owner.SpriteText.Text = "Score: `this.Score`";
+        }
+        else if(this.Owner.Name == "Player"  && otherObject.Name=="Strawberry")
+        {
+            this.Score += 10;
+            
+            this.Owner.SpriteText.Text = "Score: `this.Score`";
+        }
+    }
+}

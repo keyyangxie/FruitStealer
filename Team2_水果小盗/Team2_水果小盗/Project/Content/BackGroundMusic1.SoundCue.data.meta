@@ -1,0 +1,11 @@
+DataContent = 
+{
+	DataBuilder = 
+	{
+		string Name = "BackGroundMusic1",
+		uint64 ResourceId = 56fdb093642704eb,
+		string LoaderType = "SoundCue",
+		uint Version = 0,
+		bool ShowInEditor = true,
+	},
+},

@@ -1,0 +1,74 @@
+class PlayerControlling2 : ZilchComponent
+{
+    
+    var Victory : Level = Level.Find("Victory");
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+     function OnLogicUpdate(event : UpdateEvent)
+   {
+      this.Owner.RigidBody.Velocity = Real3(0,0,0);
+      // Have a place to record the total movement we want to make:
+      var movement =  Real3(0.0, 0.0, 0.0);
+
+    
+      // If I hold down the up arrow key,
+      if (Zero.Keyboard.KeyIsDown(Keys.Up))
+      {
+          //this.Owner.SoundEmitter.PlayCue(SoundCue.Find("dk-a2600_walk"));
+          // Record desired upward motion along the world y-axis:
+          movement +=  Real3(0.0, 1.0, 0.0);
+      }
+      // If I hold down the down arrow key,
+      if (Zero.Keyboard.KeyIsDown(Keys.Down))
+      {
+          //this.Owner.SoundEmitter.PlayCue(SoundCue.Find("dk-a2600_walk"));
+          // Record desired downward motion along the world y-axis:
+          movement +=  Real3(0.0, -1.0, 0.0);
+      }
+      // If I hold down the right arrow key,
+      if (Zero.Keyboard.KeyIsDown(Keys.Left))
+      {
+          
+          //this.Owner.SoundEmitter.PlayCue(SoundCue.Find("dk-a2600_walk"));
+          // Record desired rightward motion along the world x-axis:
+          movement -=  Real3(1.0, 0.0, 0.0);
+          this.Owner.Sprite.FlipX = true;
+      }
+      // If I hold down the left arrow key,
+      if (Zero.Keyboard.KeyIsDown(Keys.Right))
+      {
+         // this.Owner.SoundEmitter.PlayCue(SoundCue.Find("dk-a2600_walk"));
+          // Record desired leftward motion along the world x-axis:
+          movement +=  Real3(1.0, 0.0, 0.0);
+          this.Owner.Sprite.FlipX = false;
+      }
+       this.Owner.Transform.Translation += movement * event.Dt*10;
+    
+      if(this.Owner.Transform.Translation.Y>36)
+      {
+          this.Owner.Transform.Translation=Real3(this.Owner.Transform.Translation.X, 36, 0);
+      }
+      
+     
+     //Score
+     
+      if(this.Owner.Transform.Translation.Y<-1){
+          if(this.Space.Global.Score<80    )
+          {
+              this.Owner.Transform.Translation=Real3(this.Owner.Transform.Translation.X,-1,0);
+          }
+          
+          else{
+              this.Space.LoadLevel(this.Victory);
+          }
+       }
+      this.Owner.RigidBody.Velocity = Real3(0,0,0);
+      
+      
+    }
+}
+

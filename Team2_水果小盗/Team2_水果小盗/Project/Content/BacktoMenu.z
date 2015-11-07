@@ -1,0 +1,32 @@
+class BacktoMenu : ZilchComponent
+{
+    
+    
+    var Menu : Level = Level.Find("Menu");
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.MouseUp, this.OnMouseUp);
+        Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+        Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
+    }
+
+    
+        
+        function OnMouseUp(event : ViewportMouseEvent)
+        {
+            this.Space.LoadLevel(this.Menu);
+        }
+        
+        function OnMouseEnter(event : ViewportMouseEvent)
+        {
+            this.Owner.Transform.Scale=Real3(1.5,1.5,0);
+        }
+        
+        function OnMouseExit(event : ViewportMouseEvent)
+        {
+            this.Owner.Transform.Scale=Real3(1,1,0);
+        }
+    
+
+}

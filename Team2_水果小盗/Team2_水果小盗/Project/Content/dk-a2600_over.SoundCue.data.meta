@@ -1,0 +1,11 @@
+DataContent = 
+{
+	DataBuilder = 
+	{
+		string Name = "dk-a2600_over",
+		uint64 ResourceId = 56fd4d63805f5a66,
+		string LoaderType = "SoundCue",
+		uint Version = 0,
+		bool ShowInEditor = true,
+	},
+},

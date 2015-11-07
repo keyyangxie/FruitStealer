@@ -1,0 +1,20 @@
+ImageContent = 
+{
+	SpriteSourceBuilder = 
+	{
+		string Name = "Dog",
+		uint64 ResourceId = 567b9214bd344335,
+		uint64 AtlasId = 5274cf95e4a661fd,
+		uint FrameSizeX = 81,
+		uint FrameSizeY = 51,
+		uint FrameCount = 2,
+		float FrameDelay = 0.0833333,
+		float OriginX = 40,
+		float OriginY = 25,
+		float PixelsPerUnit = 64,
+		bool Smoothing = false,
+		bool Looping = true,
+		Vec4 Slices = [0, 0, 0, 0],
+		SpriteFill Fill = Stretch,
+	},
+},

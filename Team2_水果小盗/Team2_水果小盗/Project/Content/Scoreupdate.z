@@ -1,0 +1,27 @@
+class Scoreupdate : ZilchComponent
+{
+    var Score: Integer = 0;
+    
+    [Dependency]
+    var SpriteText: SpriteText;
+
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        // Display the data
+        this.Owner.SpriteText.Text = "Score: `this.Score`";
+    }
+
+   
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Score = this.Space.Global.Score;
+        // Display the data
+        this.Owner.SpriteText.Text = "Score: `this.Score`";
+        if(this.Score >50 )
+        {
+            this.Owner.SpriteText.Text = "Score: `this.Score`   Now You Can Pass The Level !";     
+        }
+        
+    }
+}

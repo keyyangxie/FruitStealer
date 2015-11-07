@@ -1,0 +1,5 @@
+class SimpleButton : ZilchComponent
+{
+    [Dependency]
+    var Sprite:Sprite;
+}

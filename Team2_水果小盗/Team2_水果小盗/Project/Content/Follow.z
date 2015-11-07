@@ -1,0 +1,25 @@
+class Follow : ZilchComponent
+{
+    var PlayerPos : Cog = null;
+    function Initialize(init : CogInitializer)
+    {
+        this.PlayerPos = this.Space.FindObjectByName("Player");
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var newScorePos = this.PlayerPos.Transform.LocalTranslation;
+        if(((this.Owner.Transform.Translation.X-this.PlayerPos.Transform.Translation.X)<6&&
+        (this.Owner.Transform.Translation.X-this.PlayerPos.Transform.Translation.X)>-6)&&
+        ((this.Owner.Transform.Translation.Y-this.PlayerPos.Transform.Translation.Y)<6&&
+        (this.Owner.Transform.Translation.Y-this.PlayerPos.Transform.Translation.Y)>-6))
+        {
+            
+            this.Owner.RigidBody.Velocity=Real3(this.PlayerPos.Transform.Translation.X-this.Owner.Transform.Translation.X,
+            this.PlayerPos.Transform.Translation.Y-this.Owner.Transform.Translation.Y,0);
+            
+            
+            }
+    }
+}

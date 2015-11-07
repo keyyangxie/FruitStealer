@@ -1,0 +1,17 @@
+class GetIntoMenu : ZilchComponent
+{
+    var Menu : Level = Level.Find("Menu");
+     function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.MouseUp, this.OnMouseUp);
+        //Zero.Connect(this.Owner, Events.MouseEnter, this.OnMouseEnter);
+        //Zero.Connect(this.Owner, Events.MouseExit, this.OnMouseExit);
+    }
+
+     function OnMouseUp(event : ViewportMouseEvent)
+    {
+        this.Space.LoadLevel(this.Menu);
+    }
+    
+    
+}

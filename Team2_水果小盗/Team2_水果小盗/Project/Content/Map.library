@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "Map",
+	uint64 LibraryId = 56769c044fb1e9e5,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},

@@ -1,0 +1,24 @@
+class ScoreMovement : ZilchComponent
+{
+    var PlayerPos : Cog = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        //get player's translation
+        this.PlayerPos = this.Space.FindObjectByName("Player");
+
+        // we want to update our score's position each game loop
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        // create a new variable to hold the player's position
+        var newScorePos = this.PlayerPos.Transform.LocalTranslation + Real3(15.0, 15.0, 0.0);
+        // save the score's z value
+        newScorePos.Z = this.Owner.Transform.LocalTranslation.Z;
+        // set the score's new position to newScorePos
+        this.Owner.Transform.LocalTranslation = newScorePos;
+    }
+}
+

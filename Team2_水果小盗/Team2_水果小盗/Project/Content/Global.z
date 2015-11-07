@@ -1,0 +1,5 @@
+class Global : ZilchComponent
+{
+    var Score : Integer = 0;
+    var Switch : Integer = 1;
+}
